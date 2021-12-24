@@ -18,7 +18,7 @@ class ProductoType extends AbstractType
             ->add('codigo', IntegerType::class)
             ->add('Enviar',SubmitType::class)
         ;
-    }
+    } 
 
     public function configureOptions(OptionsResolver $resolver): void
     {

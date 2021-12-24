@@ -42,7 +42,7 @@ class StandardController extends AbstractController
                 'Num1'=>$Num1,
                 'Num2'=>$Num2,
                 "nombres"=>$nombres,
-                'form'=> $form->createView()
+                'form'=> $form->createView() 
             )
         
         );
