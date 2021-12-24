@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Producto
 {
     /**
-     * @ORM\Id
+     * @ORM\Id 
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */

@@ -47,7 +47,7 @@ class StandardController extends AbstractController
         
         );
         
-        [
+        [ 
             
             // 'controller_name' => 'Sergio Madrid',
         ];

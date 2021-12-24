@@ -25,5 +25,5 @@ class ProductoType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Producto::class,
         ]);
-    }
+    } 
 }
