@@ -7,8 +7,10 @@ use App\Entity\Producto;
 use App\Entity\Categoria;
 use App\Controller\Productos;
 use App\Form\ProductoType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 // use App\Repository\ProductoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,15 +29,14 @@ class StandardController extends AbstractController
             $Num2 = 100;
             $Suma = $Num1+$Num2;
             $nombres = "sergio, giovanni, julian, david, MAGOLA";
-            // $form->handleRequest($request);
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $em=$this->getDoctrine()->getManager();
+                $producto = $form->getdata(); 
+                $em->persist($producto);
+                $em->flush();
+            }
             return $this->render('standard/index.html.twig', 
-            // if($form->isSubmitted()&& $form->get(){
-            //     $em=$this->getDoctrine()->getManager();
-            //     $producto = $form=>getdate(); 
-            //     $em->persist($producto);
-            //     $em->flush();
-            // }
-
                 array(
                 'SumaEntreNumeroUnoYNumero2'=>$Suma,
                 'Num1'=>$Num1,
@@ -56,9 +57,30 @@ class StandardController extends AbstractController
      * @Route("/pagina2/{nombre}/", name="pagina2")
      */
 
-    public function pagina2($nombre){
-        return $this->render('standard/pagina2.html.twig',array("parametro1"=>$nombre));
-    }
+    public function pagina2(Request $request, $nombre){
+        $form = $this->createFormBuilder()
+            ->add('nombre') // estos campos son tipo de texto
+            ->add('codigo')
+            ->add('categoria',EntityType::class, [ // ojo la categoria es el objeto de una entidad
+                'class' => Categoria::class,
+                'choice_label' =>'nombre'
+            ])    
+            ->add('Enviar',SubmitType::class)
+            ->getForm();
+        // $form->handleRequest($request);    
+        // if($form->isSubmitted() && $form->isValid()){// si el formulario es enviado y el formulario es valido, entonces que haga
+        // 1. Obtener lo datos, lo tengo del formulario y los almaceno en un arreglo que sea data
+        // $em = $this->getDoctrine()->getManager();
+        // $data = $form->getData();
+        // $producto = new Producto($data['nombre'],$date['codigo']);      // ESTO QUE ESTA OCULTO, LO DEJE ASI PORQUE ME SALIA UN ERROR Y NO PUDE SOLUCIONARLO
+        // $producto->setCategoria($data['categoria']);
+        // $em->persist($producto);
+        // $em->flush();
+        // return $this->redirectToRoute('pagina2',['nombre'=>'Guardado exitoso']);
+
+   
+    return $this->render('standard/pagina2.html.twig',array("parametro1"=>$nombre, 'form'=>$form->createView()));
+}
 
     /**
      * @Route("/PersistirDatos/", name="Persistir")

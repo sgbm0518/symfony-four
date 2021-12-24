@@ -15,3 +15,26 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    # fos_user:
+    # registration:
+    #         confirmation:
+    #             enabled: true
+    # db_driver: orm
+    # firewall_name: main
+    # user_class: App\Entity\User           
+    # from_email:
+    #        address: correo@algo.com
+    #        sender_name: test
+    # service:
+    #         mailer: 'fos_user.mailer.noop' ---------------------------------------------- sale este error-----------
+    # Por ende no lo guarde  ->
+
+    # Unrecognized options "fos_user, registration, db_driver, firewall_name,
+    # user_class, from_email, service" under "framework". Available options are 
+    # "annotations", "assets", "cache", "csrf_protection", "default_locale", 
+    # "disallow_search_engine_index", "error_controller", "esi", "form", "fragments", 
+    # "http_client", "http_method_override", "ide", "lock", "mailer", "messenger", 
+    # "php_errors", "profiler", "property_access", "property_info", "request", 
+    # "router", "secret", "secrets", "serializer", "session", "ssi", "templating", 
+    # "test", "translator", "trusted_hosts", "validation", "web_link", "workflows".
